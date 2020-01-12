@@ -13,9 +13,22 @@ let router = new VueRouter({
     },
     {
       name: 'Index',
-      path: '/index',
+      path: '/',
       component: Index
     }
   ]
+})
+// 登录页以外的才需要token以后要清楚别人的需要别麻木做
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next()
+  } else {
+    let token = localStorage.getItem('houtai_user_token')
+    if (token) {
+      next();
+    } else {
+      next({ name: 'Login' })
+    }
+  }
 })
 export default router;

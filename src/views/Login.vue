@@ -44,8 +44,8 @@ export default {
   data() {
     return {
       user: {
-        username: '10086',
-        password: '123456'
+        username: '100866',
+        password: '123'
       },
       rules: {
         username: [
@@ -79,10 +79,16 @@ export default {
           if (res.data.message === '用户不存在') {
             this.$message.warning(res.data.message)
           } else {
-            console.log(111)
+            this.$message.success('登录成功')
+            let token = res.data.data.token
+            localStorage.setItem('houtai_user_token', token)
+            localStorage.setItem('houtai_user_msg', JSON.stringify(res.data.data.user))
+            this.$router.push({ name: 'Index' })
+            console.log(res)
           }
         } else {
-          console.log('啊啊啊出错了');
+          this.$message.fail('数据输入有误')
+          // console.log('啊啊啊出错了');
           return false;
         }
       });
