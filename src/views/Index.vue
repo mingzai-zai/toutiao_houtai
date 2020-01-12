@@ -1,12 +1,70 @@
 <template>
   <div class="index">
     <el-container>
-      <el-aside width="150px">Aside</el-aside>
+      <el-aside width="200px">
+        <!-- default-active默认展开一定要设置的是二级菜单 -->
+        <!-- unique-opened设置只能有一个一级菜单展开boolean就是动态的标识符 -->
+        <el-menu
+          :router="true"
+          :unique-opened="true"
+          default-active="1-1"
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>用户管理</span>
+            </template>
+            <el-menu-item index="1-1">
+              <template slot="title">
+                <i class="el-icon-s-operation"></i>
+                <span>用户列表</span>
+              </template>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>文章管理</span>
+            </template>
+            <el-menu-item index="2-1">
+              <template slot="title">
+                <i class="el-icon-s-operation"></i>
+                <span>文章列表</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item index="2-2">
+              <template slot="title">
+                <i class="el-icon-s-operation"></i>
+                <span>发布文章</span>
+              </template>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>哈栏目管理</span>
+            </template>
+            <el-menu-item index="3-1">
+              <template slot="title">
+                <i class="el-icon-s-operation"></i>
+                <span>栏目列表</span>
+              </template>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
       <el-container>
-        <el-header style="text-align: right; font-size: 12px;height:60px;">
-          <img src="../assets/u=1442998595,1306184984&fm=26&gp=0.jpg" alt="" />
-          <span>我是管理员</span>
-          <a href="javascript:;">退出</a>
+        <el-header style="height:60px;">
+          <span class="el-icon-s-unfold"></span>
+          <h3>传智播客</h3>
+          <div class="person">
+            <span>欢迎啊： 肥仔</span>
+            <span>退出</span>
+          </div>
         </el-header>
         <el-main>Main</el-main>
         <!-- <el-footer>Footer</el-footer> -->
@@ -24,31 +82,30 @@ export default {};
   width: 100%;
   height: 100%;
   .el-container {
-    width: 100%;
     height: 100%;
+    // background-color:#545c64;
     .el-aside {
       height: 100%;
-      background-color: rgb(27, 19, 19);
-      color: #ccc;
+      background-color: #545c64;
     }
   }
 }
 .el-header {
-  background-color: #555;
-  color: #ccc;
-  line-height: 40px;
-  padding: 10px 0;
-    img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      vertical-align: middle;
+  display: flex;
+  background-color: #545c64;
+  padding: 0;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+  .el-icon-s-unfold {
+    font-size: 60px;
+  }
+  h3 {
+    font-size: 35px;
   }
   span {
-      margin: 0 20px 0 10px;
-  }
-  a{
-      margin-right: 40px;
+    margin-right: 20px;
   }
 }
 </style>
