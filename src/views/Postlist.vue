@@ -14,12 +14,16 @@
       </el-table-column>
       <el-table-column  label="日期" width="250">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
+          <i class="el-icon -time"></i>
           <span style="margin-left: 10px">{{ scope.row.user.create_date | timer}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="标题" width="500"> </el-table-column>
-      <el-table-column prop="type" label="类型" width="50"> </el-table-column>
+      <el-table-column prop="title" label="标题" width="480"></el-table-column>
+      <el-table-column  label="类型" width="80">
+        <template slot-scope="scope">
+          {{ scope.row.type===1?'文章':'视频'}}
+        </template>
+        </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" content="编辑" placement="top">
@@ -38,6 +42,16 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageIndex"
+      :page-sizes="[2, 4, 6, 8]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -46,22 +60,42 @@ import { getAllarticle } from '@/apis/article.js';
 export default {
   data() {
     return {
-      postlist: []
+      postlist: [],
+      pageIndex: 1,
+      pageSize: 2,
+      total: null,
+      time: null
     };
   },
   async mounted() {
-    let res = await getAllarticle();
-    console.log(res);
-    this.postlist = res.data.data;
+    this.init();
   },
   methods: {
+    async init() {
+      let res = await getAllarticle({ pageSize: this.pageSize, pageIndex: this.pageIndex });
+      console.log(res);
+      this.postlist = res.data.data;
+      this.total = res.data.total;
+    },
     handleEdit(index, data) {
       console.log(index, data);
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.init();
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+      this.pageIndex = val;
+      // 每次改变都要发一次请求
+      this.init();
     }
+
   },
   filters: {
     timer(time, spe) {
-      time = new Date();
+      time = new Date(time);
       spe = spe || '/';
       let y = time.getFullYear();
       let m = time.getMonth() + 1;

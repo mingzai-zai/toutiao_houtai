@@ -1,7 +1,8 @@
 import axios from '@/utils/myaxios.js'
 
-export const getAllarticle = () => {
+export const getAllarticle = (params) => {
   return axios({
-    url: '/post'
+    url: '/post',
+    params
   })
 }
