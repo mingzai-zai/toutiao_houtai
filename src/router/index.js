@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue'
 import Index from '@/views/Index.vue'
 import Welcome from '@/views/Welcome.vue'
 import Postlist from '@/views/Postlist.vue'
+import Sendarticle from '@/views/Sendarticle.vue'
 
 Vue.use(VueRouter)
 let router = new VueRouter({
@@ -30,6 +31,11 @@ let router = new VueRouter({
           name: 'Postlist',
           path: 'postlist',
           component: Postlist
+        },
+        {
+          name: 'Sendarticle',
+          path: 'sendarticle',
+          component: Sendarticle
         }
       ]
     }

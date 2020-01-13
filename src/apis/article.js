@@ -6,3 +6,11 @@ export const getAllarticle = (params) => {
     params
   })
 }
+
+export const publishArticle = (data) => {
+  return axios({
+    method: 'post',
+    url: '/post',
+    data
+  })
+}

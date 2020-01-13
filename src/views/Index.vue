@@ -38,7 +38,7 @@
                 <span>文章列表</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="2-2">
+            <el-menu-item index="/index/sendarticle">
               <template slot="title">
                 <i class="el-icon-s-operation"></i>
                 <span>发布文章</span>
